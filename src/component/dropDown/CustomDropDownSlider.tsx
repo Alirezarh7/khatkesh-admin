@@ -1,4 +1,4 @@
-import { useRef, useEffect, JSX} from "react";
+import { useRef, useEffect, type JSX} from "react";
 import {useLocation, Link} from "react-router-dom";
 import {RiArrowDropDownLine, RiArrowDropLeftLine, RiArrowDropUpLine} from "react-icons/ri";
 

@@ -1,7 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {TbLogout} from 'react-icons/tb';
 import {useNavigate} from "react-router-dom";
-import {Paths} from "../../router/paths.tsx";
 import {BsChatLeftText} from "react-icons/bs";
 import {RiArrowDropDownLine, RiArrowDropUpLine} from "react-icons/ri";
 
@@ -58,7 +57,7 @@ const CustomDropDownHeader = () => {
             <button
               className="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
               onClick={() => {
-                history(Paths.massage);
+                history('/');
                 setIsOpen(false);
               }}>
               <BsChatLeftText className={'text-goldColor'}/>
