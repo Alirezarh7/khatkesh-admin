@@ -41,7 +41,7 @@ const CustomDropDownHeader = () => {
             onClick={toggleDropdown}>
             <div className="flex justify-around w-full items-center ">
               <strong className="font-weight-bold text-gray-800 px-4">
-                {'علیرضا رحیمی'}
+                {'سبحان نظری'}
               </strong>
               <div className="border-r p-1 border-goldColor">
                 {isOpen ? (
