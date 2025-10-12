@@ -2,7 +2,7 @@ import Header from "./header/Header.tsx";
 import WebRouter from "../../router/WebRouter.tsx";
 // import BottomNav from "./BottomNav.tsx";
 import {useLocation} from "react-router-dom";
-import {Paths} from "../../router/paths.ts";
+import {Paths} from "../../router/paths.tsx";
 
 
 const MeinLayout = () => {

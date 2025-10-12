@@ -5,7 +5,7 @@ import {TfiReceipt} from "react-icons/tfi";
 import {BiFoodMenu} from "react-icons/bi";
 import {IoFastFoodOutline} from "react-icons/io5";
 import {useLocation, useNavigate} from "react-router-dom";
-import {Paths} from "../../router/paths.ts";
+import {Paths} from "../../router/paths.tsx";
 import {HiMiniReceiptRefund} from "react-icons/hi2";
 
 const BottomNav = () => {

@@ -1,17 +1,16 @@
-import {Route, Routes} from 'react-router-dom';
-import {Paths} from "./paths.ts";
-import HomePage from "../pages/HomePage.tsx";
-import LoginPage from "../pages/Login/LoginPage.tsx";
+import { Route, Routes } from "react-router-dom";
+import { Paths } from "./paths";
 
 
 const WebRouter = () => {
 
-    return (
-        <Routes>
-            <Route path={Paths.home} element={<HomePage/>}/>
-            <Route path={Paths.login} element={<LoginPage/>}/>
-        </Routes>
-    );
+  return (
+    <Routes>
+      {Paths.map((item) => (
+        <Route key={item.path} path={item.path} element={item.element} />
+      ))}
+    </Routes>
+  );
 };
 
 export default WebRouter;

@@ -1,1 +1,30 @@
+@import url("/public/content/fonts/iransans/css/style.css");
 @import "tailwindcss";
+
+@theme {
+    --color-textColor: var(--textColor);
+    --color-borderColor: var(--borderColor);
+    --color-cardColor: var(--cardColor);
+    --color-yellowColor: var(--yellowColor);
+    --color-cancelFullRed: var(--cancelFullRed);
+    --color-lightRedLessRed: var(--lightRedLessRed);
+
+    @keyframes infiniteSlider {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(50%);
+        }
+    }
+}
+
+:root {
+    --textColor: #0D2A4C;
+    --borderColor: #01445e;
+    --cardColor: #36a3cf;
+    --yellowColor: #e1ac33;
+    --cancelFullRed : #970C0C;
+    --lightRedLessRed : #d35856 ;
+}
+

@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import {TbLogout} from 'react-icons/tb';
 import {useNavigate} from "react-router-dom";
-import {Paths} from "../../router/paths.ts";
+import {Paths} from "../../router/paths.tsx";
 import {BsChatLeftText} from "react-icons/bs";
 import {RiArrowDropDownLine, RiArrowDropUpLine} from "react-icons/ri";
 
