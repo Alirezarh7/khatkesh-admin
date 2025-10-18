@@ -17,8 +17,10 @@ const CustomSidebar = () => {
         },
         {
             icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت کاربران',id:'1', href: '', dropdownItems: [
-                {href: '/', title: 'ایجاد مدرس'},
-                {href: '/', title: 'ایجاد دستیار'}
+                {href: '/', title: 'لیست کاربران'},
+                {href: '/', title: 'ایجاد کاربر'},
+                {href: '/', title: 'لیست نقش'},
+                {href: '/', title: 'ایجاد نقش'},
             ]
         },
     ]

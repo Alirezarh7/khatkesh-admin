@@ -1,4 +1,5 @@
 import HomePage from "../pages/HomePage.tsx";
+import ListManagementPage from "../pages/ListManagementPage.tsx";
 
 export interface RouteConfig {
   path: string;
@@ -8,6 +9,6 @@ export interface RouteConfig {
 }
 
 export const Paths: RouteConfig[] = [
-  // { path: "*", label: "صفحه مورد نظر یافت نشد", element: <NotFoundPage /> },
   { path: "/", label: "خانه", element: <HomePage /> },
+  { path: "/list-managementPage", label: "لیست کاربران", element: <ListManagementPage /> },
 ];
