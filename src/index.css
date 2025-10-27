@@ -1,6 +1,30 @@
 @import url("/public/content/fonts/iransans/css/style.css");
 @import "tailwindcss";
 
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--background) inset !important;
+    box-shadow: 0 0 0px 1000px var(--background) inset !important;
+    -webkit-text-fill-color: var(--text) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* برای حالت دارک */
+.dark input:-webkit-autofill,
+.dark textarea:-webkit-autofill,
+.dark select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--background) inset !important;
+    box-shadow: 0 0 0px 1000px var(--background) inset !important;
+    -webkit-text-fill-color: var(--text) !important;
+}
+@layer utilities {
+    .no-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px var(--muted) transparent 50 inset !important;
+        -webkit-text-fill-color: var(--text) !important;
+    }
+}
+
 
 @theme {
     --color-background: var(--background);
@@ -14,7 +38,7 @@
 
 :root{
     /* Light theme */
-    --background: #f3f9fc;
+    --background: #ffffff;
     --text: #1A3D63;
     --liteText: #f3f9fc;
     --muted: #9fb2b9;

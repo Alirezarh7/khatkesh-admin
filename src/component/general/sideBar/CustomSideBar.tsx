@@ -9,18 +9,11 @@ const CustomSidebar = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
     const dropDownData = [
-        {
-            icon: <SiGoogleclassroom  className={'text-borderColor'}/>, title: 'دوره های خط کش',id:'2', href: '', dropdownItems: [
-                {href: '/', title: 'ایجاد دوره'},
-                {href: '/', title: 'لیست دوره'}
-            ]
-        },
-        {
-            icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت کاربران',id:'1', href: '', dropdownItems: [
-                {href: '/', title: 'لیست کاربران'},
-                {href: '/', title: 'ایجاد کاربر'},
-                {href: '/', title: 'لیست نقش'},
-                {href: '/', title: 'ایجاد نقش'},
+        {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت کاربران',id:'1', href: '/list-managementPage'},
+        {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت نقش ها',id:'2', href: '/list-role'},
+        {icon: <SiGoogleclassroom  className={'text-borderColor'}/>, title: 'دوره های خط کش',id:'3', href: '', dropdownItems: [
+                {href: '/create-course', title: 'ایجاد دوره'},
+                {href: '/list-course', title: 'لیست دوره'}
             ]
         },
     ]

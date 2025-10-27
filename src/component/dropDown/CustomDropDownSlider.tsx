@@ -43,7 +43,7 @@ const CustomDropDownSlider = ({href, icon, title, dropdownItems = [], setSidebar
 
                 <Link
                     to={href}
-                    className={`w-full  cursor-pointer ${  location.pathname === href ? 'bg-blue-100' : 'bg-white'} py-1 border-b border-goldColor flex justify-between items-center`}
+                    className={`w-full  cursor-pointer ${  location.pathname === href ? 'bg-blue-300' : 'bg-white'} py-1 border-b border-goldColor flex justify-between items-center`}
                 >
                     <div className="text-customBlue pr-3">{icon}</div>
                     <div className="text-customBlue">{title}</div>
@@ -79,7 +79,7 @@ const CustomDropDownSlider = ({href, icon, title, dropdownItems = [], setSidebar
                                         key={index}
                                         to={item.href}
                                         className={` text-sm py-1 hover:bg-primary  border-b ${
-                                            isActive ? 'bg-blue-200' : 'bg-white'
+                                            isActive ? 'bg-blue-300' : 'bg-white'
                                         } border-goldColor pr-10  text-gray-700`}
                                         onClick={() => setSidebarOpen(false)}
                                     >
