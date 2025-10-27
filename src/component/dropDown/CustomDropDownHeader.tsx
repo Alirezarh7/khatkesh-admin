@@ -3,19 +3,27 @@ import {TbLogout} from 'react-icons/tb';
 import {useNavigate} from "react-router-dom";
 import {BsChatLeftText} from "react-icons/bs";
 import {RiArrowDropDownLine, RiArrowDropUpLine} from "react-icons/ri";
+import {AuthStore} from "../../store/authStore.ts";
+import {useLogout} from "../../service/auth.service.ts";
+import RulerLoadingOverlay from "../general/rulerLoading/RulerLoading.tsx";
 
 
 const CustomDropDownHeader = () => {
+  const {clearToken} = AuthStore()
   const [isOpen, setIsOpen] = useState(false);
+  const {mutate,isPending} = useLogout()
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
   const history = useNavigate()
 
-  const automaticlyLogout = async () => {
-    localStorage.clear();
-    sessionStorage.clear();
+  const automaticallyLogout = async () => {
+    mutate(undefined,{onSuccess:()=>{
+        localStorage.clear();
+        sessionStorage.clear();
+        clearToken()
+      }})
   };
 
   useEffect(() => {
@@ -33,6 +41,7 @@ const CustomDropDownHeader = () => {
   }, []);
   return (
     <>
+      <RulerLoadingOverlay open={isPending} message={'در حال خروج از سیستم'} />
       <div className="z-10 mx-2 md:mx-10">
         <div ref={dropdownRef}>
           <button
@@ -65,7 +74,7 @@ const CustomDropDownHeader = () => {
             </button>
             <button
               className="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-              onClick={automaticlyLogout}>
+              onClick={automaticallyLogout}>
               <TbLogout className={'text-goldColor'}/>
               خروج
             </button>

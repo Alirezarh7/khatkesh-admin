@@ -7,6 +7,7 @@ import {SnackbarProvider} from "notistack";
 
 
 const root = createRoot(document.getElementById('root')!);
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -26,8 +27,7 @@ const queryClient = new QueryClient({
                             info: '📢',
                           }}
         />
-          {/*@ts-ignore*/}
-        <App/>
+         <App/>
       </BrowserRouter>
     </QueryClientProvider>
   );

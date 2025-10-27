@@ -1,30 +1,36 @@
 @import url("/public/content/fonts/iransans/css/style.css");
 @import "tailwindcss";
 
-@theme {
-    --color-textColor: var(--textColor);
-    --color-borderColor: var(--borderColor);
-    --color-cardColor: var(--cardColor);
-    --color-yellowColor: var(--yellowColor);
-    --color-cancelFullRed: var(--cancelFullRed);
-    --color-lightRedLessRed: var(--lightRedLessRed);
 
-    @keyframes infiniteSlider {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(50%);
-        }
-    }
+@theme {
+    --color-background: var(--background);
+    --color-text: var(--text);
+    --color-muted: var(--muted);
+    --color-accent: var(--accent);
+    --color-border: var(--border);
+    --color-liteText: var(--liteText);
+    --color-fixedDark: var(--fixedDark);
 }
 
-:root {
-    --textColor: #0D2A4C;
-    --borderColor: #01445e;
-    --cardColor: #36a3cf;
-    --yellowColor: #e1ac33;
-    --cancelFullRed : #970C0C;
-    --lightRedLessRed : #d35856 ;
+:root{
+    /* Light theme */
+    --background: #f3f9fc;
+    --text: #1A3D63;
+    --liteText: #f3f9fc;
+    --muted: #9fb2b9;
+    --accent: #F5A201;
+    --border: #b5b5b5;
+    --fixedDark: #0A1931;
+}
+
+
+.dark{
+    --background: #0A1931;
+    --text: #e5eef4;
+    --liteText: #e5eef4;
+    --muted: #7c909e;
+    --accent: #f4b01b;
+    --border: #848484FF;
+    --fixedDark: #0A1931;
 }
 
