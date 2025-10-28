@@ -7,6 +7,7 @@ import TeacherManagementPage from "../pages/userManagment/TeacherManagementPage.
 import ReportsPage from "../pages/payManagmenet/ReportsPage.tsx";
 import PayManagementPage from "../pages/payManagmenet/PayManagementPage.tsx";
 import MyCoursePage from "../pages/MyCoursePage.tsx";
+import ListOfCoursePage from "../pages/courseManagement/ListOfCoursePage.tsx";
 
 export interface RouteConfig {
   path: string;
@@ -24,7 +25,7 @@ export const Paths: RouteConfig[] = [
   { path: "/list-access", label: "دسترسی ها", element: <CreateCoursePage /> },
   { path: "/pay-management", label: "مدیریت پرداخت", element: <PayManagementPage /> },
   { path: "/reports", label: "گزارشات", element: <ReportsPage /> },
-  { path: "/create-course", label: "تعریف دوره", element: <ReportsPage /> },
-  { path: "/list-course", label: "لیست دوره ها", element: <ReportsPage /> },
+  { path: "/create-course", label: "تعریف دوره", element: <CreateCoursePage /> },
+  { path: "/list-course", label: "لیست دوره ها", element: <ListOfCoursePage /> },
   { path: "/my-course", label: "دوره های من", element: <MyCoursePage /> },
 ];

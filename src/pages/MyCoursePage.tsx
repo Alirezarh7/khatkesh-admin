@@ -1,9 +1,10 @@
+import Breadcrumb from "../component/general/breadCrumb/Breadcrumb.tsx";
 
 const MyCoursePage = () => {
   return (
-    <div>
-
-    </div>
+    <>
+      <Breadcrumb />
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, {type ChangeEvent, useRef } from 'react';
 
 interface IProps {
   value: number;

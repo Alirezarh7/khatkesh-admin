@@ -2,7 +2,7 @@ import Breadcrumb from "../../component/general/breadCrumb/Breadcrumb.tsx";
 import {useGetall} from "../../service/user.service.ts";
 import DataGrid from "../../component/general/grid/DataGrid.tsx";
 import {useState} from "react";
-import {useWindowWidth} from "../../hook/useWindowWidth.ts";
+// import {useWindowWidth} from "../../hook/useWindowWidth.ts";
 
 
 const ListManagementPage = () => {
@@ -17,9 +17,9 @@ const ListManagementPage = () => {
     {title: "تاریخ ویرایش اکانت", key: "updatedAt"},
   ];
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize = useWindowWidth() > 550 ? 10 : 5;
+  // const pageSize = useWindowWidth() > 550 ? 10 : 5;
   const bodyData = {
-    item: data?.users.value?.map((userData) => ({
+    item: data?.users.value?.map((userData:any) => ({
       fullName: userData.firstName + userData.lastName,
       // email:userData.email,
       // emailVerified:userData.emailVerified ? '✅' : '❌',

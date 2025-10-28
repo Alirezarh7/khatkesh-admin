@@ -8,7 +8,7 @@ interface IProps {
     href: string;
     icon: JSX.Element;
     title: string;
-    dropdownItems: { href: string; title: string }[];
+    dropdownItems: any;
     setSidebarOpen: (isOpen: boolean) => void;
     openDropdownId: string | null;
     setOpenDropdownId: (id: string | null) => void;
@@ -30,7 +30,7 @@ const CustomDropDownSlider = ({href, icon, title, dropdownItems = [], setSidebar
     };
 
     useEffect(() => {
-        const isInDropdown = dropdownItems.some(item => item.href === location.pathname);
+        const isInDropdown = dropdownItems.some((item:any) => item.href === location.pathname);
         if (isInDropdown) {
             setOpenDropdownId(id);
         }
@@ -72,7 +72,7 @@ const CustomDropDownSlider = ({href, icon, title, dropdownItems = [], setSidebar
                         }`}
                     >
                         <div className="flex flex-col  bg-white rounded-b-md">
-                            {dropdownItems.map((item, index) => {
+                            {dropdownItems.map((item:any, index:number) => {
                                 const isActive = location.pathname === item.href;
                                 return (
                                     <Link

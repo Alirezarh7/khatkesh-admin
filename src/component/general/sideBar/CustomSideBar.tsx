@@ -16,7 +16,7 @@ const CustomSidebar = () => {
           ]},
         {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت نقش ها',id:'2', href: '',  dropdownItems: [
             {href: '/list-roles', title: 'لیست نقش ها'},
-            {href: '/list-course', title: 'دسترسی ها'}
+            {href: '/list-access', title: 'دسترسی ها'}
           ]},
       {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'پرداخت ها',id:'3', href: '', dropdownItems: [
           {href: '/pay-management', title: 'مدیریت پرداخت'},
