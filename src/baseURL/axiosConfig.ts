@@ -2,12 +2,12 @@ import axios from 'axios';
 import { currentBaseUrl} from "./baseURL.ts";
 import { enqueueSnackbar } from 'notistack';
 
-const automaticallyLogout = (): void => {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.reload();
-    window.location.replace('/');
-};
+// const automaticallyLogout = (): void => {
+//     localStorage.clear();
+//     sessionStorage.clear();
+//     window.location.reload();
+//     window.location.replace('/');
+// };
 const axiosConfig = axios.create({
     baseURL: currentBaseUrl,
 });
@@ -26,9 +26,11 @@ axiosConfig.interceptors.request.use((config) => {
 axiosConfig.interceptors.response.use(
     response => response,
     axiosError => {
-        if (axiosError.response?.status === 401){
-            automaticallyLogout()
-        } else if (axiosError.response?.status === 502) {
+        // if (axiosError.response?.status === 401){
+        //     automaticallyLogout()
+        // }
+        // else
+          if (axiosError.response?.status === 502) {
             return enqueueSnackbar('سامانه در حال بروز رسانی نسخه جدید می باشد، لطفا تا ۱۵ دقیقه دیگر مراجعه نفرمایید', { variant: 'info' });
         } else {
             return Promise.reject(axiosError);

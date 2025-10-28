@@ -2,20 +2,31 @@ import {useState} from "react";
 import {RiMenuFold3Line} from "react-icons/ri";
 import CustomDropDownSlider from "../../dropDown/CustomDropDownSlider.tsx";
 import {GrUserAdmin} from "react-icons/gr";
-import {SiGoogleclassroom} from "react-icons/si";
+
 
 
 const CustomSidebar = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
     const dropDownData = [
-        {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت کاربران',id:'1', href: '/list-managementPage'},
-        {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت نقش ها',id:'2', href: '/list-role'},
-        {icon: <SiGoogleclassroom  className={'text-borderColor'}/>, title: 'دوره های خط کش',id:'3', href: '', dropdownItems: [
-                {href: '/create-course', title: 'ایجاد دوره'},
-                {href: '/list-course', title: 'لیست دوره'}
-            ]
-        },
+        {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت کاربران',id:'1', href: '', dropdownItems: [
+            {href: '/list-kahtkesh-managementPage', title: 'لیست کاربران وب سایت'},
+            {href: '/list-admin-management', title: 'لیست افراد ادمین'},
+            {href: '/list-teacher', title: 'لیست معلمین'},
+          ]},
+        {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت نقش ها',id:'2', href: '',  dropdownItems: [
+            {href: '/list-roles', title: 'لیست نقش ها'},
+            {href: '/list-course', title: 'دسترسی ها'}
+          ]},
+      {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'پرداخت ها',id:'3', href: '', dropdownItems: [
+          {href: '/pay-management', title: 'مدیریت پرداخت'},
+          {href: '/reports', title: 'گزارشات'},
+        ]},
+      {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'دوره ها',id:'4', href: '', dropdownItems: [
+          {href: '/create-course', title: 'تعریف دوره'},
+          {href: '/list-course', title: 'لیست دوره تعرف شده'},
+        ]},
+      {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'دوره های من',id:'5', href: '/my-course'},
     ]
     return (
         <div className="relative  ">

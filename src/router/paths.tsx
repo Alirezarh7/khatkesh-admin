@@ -1,7 +1,12 @@
 import HomePage from "../pages/HomePage.tsx";
-import ListManagementPage from "../pages/ListManagementPage.tsx";
-import RoleManagementPage from "../pages/RoleManagementPage.tsx";
-import CreateCoursePage from "../pages/CreateCoursePage.tsx";
+import ListManagementPage from "../pages/userManagment/ListManagementPage.tsx";
+import RoleManagementPage from "../pages/roleManagement/RoleManagementPage.tsx";
+import CreateCoursePage from "../pages/courseManagement/CreateCoursePage.tsx";
+import AdminManagementPage from "../pages/userManagment/AdminManagementPage.tsx";
+import TeacherManagementPage from "../pages/userManagment/TeacherManagementPage.tsx";
+import ReportsPage from "../pages/payManagmenet/ReportsPage.tsx";
+import PayManagementPage from "../pages/payManagmenet/PayManagementPage.tsx";
+import MyCoursePage from "../pages/MyCoursePage.tsx";
 
 export interface RouteConfig {
   path: string;
@@ -12,8 +17,14 @@ export interface RouteConfig {
 
 export const Paths: RouteConfig[] = [
   { path: "/", label: "خانه", element: <HomePage /> },
-  { path: "/list-managementPage", label: "لیست کاربران", element: <ListManagementPage /> },
-  { path: "/list-role", label: "مدیریت نقش ها", element: <RoleManagementPage /> },
-  { path: "/list-course", label: "لیست دوره ها", element: <ListManagementPage /> },
-  { path: "/create-course", label: "ایجاد دوره", element: <CreateCoursePage /> },
+  { path: "/list-kahtkesh-managementPage", label: "لیست کاربران خط کش", element: <ListManagementPage /> },
+  { path: "/list-admin-management", label: "لیست افراد ادمین", element: <AdminManagementPage /> },
+  { path: "/list-teacher", label: "لیست معلمین", element: <TeacherManagementPage /> },
+  { path: "/list-roles", label: "لیست نقش ها", element: <RoleManagementPage /> },
+  { path: "/list-access", label: "دسترسی ها", element: <CreateCoursePage /> },
+  { path: "/pay-management", label: "مدیریت پرداخت", element: <PayManagementPage /> },
+  { path: "/reports", label: "گزارشات", element: <ReportsPage /> },
+  { path: "/create-course", label: "تعریف دوره", element: <ReportsPage /> },
+  { path: "/list-course", label: "لیست دوره ها", element: <ReportsPage /> },
+  { path: "/my-course", label: "دوره های من", element: <MyCoursePage /> },
 ];
