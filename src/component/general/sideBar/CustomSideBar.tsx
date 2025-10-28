@@ -9,6 +9,7 @@ const CustomSidebar = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
     const dropDownData = [
+
         {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت کاربران',id:'1', href: '', dropdownItems: [
             {href: '/list-kahtkesh-managementPage', title: 'لیست کاربران وب سایت'},
             {href: '/list-admin-management', title: 'لیست افراد ادمین'},
@@ -16,7 +17,6 @@ const CustomSidebar = () => {
           ]},
         {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'مدیریت نقش ها',id:'2', href: '',  dropdownItems: [
             {href: '/list-roles', title: 'لیست نقش ها'},
-            {href: '/list-access', title: 'دسترسی ها'}
           ]},
       {icon: <GrUserAdmin  className={'text-borderColor'}/>, title: 'پرداخت ها',id:'3', href: '', dropdownItems: [
           {href: '/pay-management', title: 'مدیریت پرداخت'},

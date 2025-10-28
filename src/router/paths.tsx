@@ -18,11 +18,10 @@ export interface RouteConfig {
 
 export const Paths: RouteConfig[] = [
   { path: "/", label: "خانه", element: <HomePage /> },
-  { path: "/list-kahtkesh-managementPage", label: "لیست کاربران خط کش", element: <ListManagementPage /> },
+  { path: "/list-kahtkesh-managementPage", label: "لیست کاربران خط کش", element: <ListManagementPage /> ,requiredPermission:'users' },
   { path: "/list-admin-management", label: "لیست افراد ادمین", element: <AdminManagementPage /> },
   { path: "/list-teacher", label: "لیست معلمین", element: <TeacherManagementPage /> },
   { path: "/list-roles", label: "لیست نقش ها", element: <RoleManagementPage /> },
-  { path: "/list-access", label: "دسترسی ها", element: <CreateCoursePage /> },
   { path: "/pay-management", label: "مدیریت پرداخت", element: <PayManagementPage /> },
   { path: "/reports", label: "گزارشات", element: <ReportsPage /> },
   { path: "/create-course", label: "تعریف دوره", element: <CreateCoursePage /> },
