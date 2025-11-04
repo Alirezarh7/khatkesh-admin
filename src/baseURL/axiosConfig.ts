@@ -7,6 +7,7 @@ const automaticallyLogout = (): void => {
     sessionStorage.clear();
     window.location.reload();
     window.location.replace('/');
+
 };
 const axiosConfig = axios.create({
     baseURL: currentBaseUrl,
@@ -28,6 +29,7 @@ axiosConfig.interceptors.response.use(
     axiosError => {
         if (axiosError.response?.status === 401){
             automaticallyLogout()
+            enqueueSnackbar(axiosError.response.data.error,{variant: 'error'});
         } else
           if (axiosError.response?.status === 502) {
             return enqueueSnackbar('سامانه در حال بروز رسانی نسخه جدید می باشد، لطفا تا ۱۵ دقیقه دیگر مراجعه نفرمایید', { variant: 'info' });

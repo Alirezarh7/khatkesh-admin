@@ -6,6 +6,7 @@ import {useRegister} from "../../../service/role.service.ts";
 import type {PermissionGroup, SelectedState} from "../../../types/generalType.ts";
 import PermissionAccordion from "../../general/permissionAccordion/PermissionAccordion.tsx";
 import {useMemo, useState} from "react";
+import {enqueueSnackbar} from "notistack";
 
 interface IProps {
   isOpen: boolean;
@@ -30,8 +31,6 @@ const CreateAndEditRoleModal = ({isOpen, onClose}: IProps) => {
   const {
     control,
     handleSubmit,
-    register,
-    formState: {errors},
   } = useForm<FormValues>({
     mode: "onTouched",
     defaultValues: {title: '', description: ''},
@@ -40,16 +39,16 @@ const CreateAndEditRoleModal = ({isOpen, onClose}: IProps) => {
   const onSubmit = async (values: FormValues) => {
     console.log(values)
     console.log("payload to backend:", payload);
-    // mutate({title: values.title, description: values.description}, {
-    //   onSuccess: (value) => {
-    //     console.log(value)
-    //     onClose()
-    //   },
-    //   onError: (err) => {
-    //     console.log(err)
-    //     enqueueSnackbar(err.message, {variant: 'error'})
-    //   }
-
+    mutate({title: values.title, description: values.description}, {
+        onSuccess: (value) => {
+            console.log(value)
+            onClose()
+        },
+        onError: (err) => {
+            console.log(err)
+            enqueueSnackbar(err.message, {variant: 'error'})
+        }
+    })
   };
   const data: PermissionGroup[] = [
     {

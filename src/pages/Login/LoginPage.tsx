@@ -8,7 +8,7 @@ import CustomButton from "../../component/general/button/Button.tsx";
 import {useLogin} from "../../service/auth.service.ts";
 import {AuthStore} from "../../store/authStore.ts";
 import RulerLoadingOverlay from "../../component/general/rulerLoading/RulerLoading.tsx";
-import {enqueueSnackbar} from "notistack";
+// import {enqueueSnackbar} from "notistack";
 
 type FormValues = {
   email: string;
@@ -31,14 +31,13 @@ export default function LoginPage() {
   const {setToken} = AuthStore();
   const {mutate,isPending} = useLogin()
   const onSubmit = async (values: FormValues) => {
-    console.log(values)
     mutate({email: values.email, password: values.password}, {
       onSuccess: (value) => {
         setToken(value.token)
       },
       onError: (err) => {
         console.log(err)
-        enqueueSnackbar(err.message, {variant:'error'})
+        // enqueueSnackbar(err.message, {variant:'error'})
       }
     });
   };

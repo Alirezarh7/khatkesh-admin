@@ -1,4 +1,4 @@
-import { useRef, useEffect, type JSX} from "react";
+import { useRef, useEffect} from "react";
 import {useLocation, Link} from "react-router-dom";
 import {RiArrowDropDownLine, RiArrowDropLeftLine, RiArrowDropUpLine} from "react-icons/ri";
 
@@ -6,7 +6,7 @@ import {RiArrowDropDownLine, RiArrowDropLeftLine, RiArrowDropUpLine} from "react
 interface IProps {
     id: string;
     href: string;
-    icon: JSX.Element;
+    icon: any;
     title: string;
     dropdownItems: any;
     setSidebarOpen: (isOpen: boolean) => void;

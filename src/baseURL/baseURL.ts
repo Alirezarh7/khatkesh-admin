@@ -1,4 +1,4 @@
 const baseUrls = {
-    Interanl: 'http://localhost:8080/',
+    Interanl: 'http://localhost:7001/',
 };
 export const currentBaseUrl: string = baseUrls.Interanl;
