@@ -31,7 +31,7 @@ const CustomModal = ({ isOpen, title = 'My Modal', onDismiss, children, footerDa
                 className=' fixed w-screen h-screen bg-black/50 top-0 left-0 right-0 bottom-0 z-40 flex justify-center items-center  '
                 onClick={onDismiss}>
                 <div
-                    className={` mx-auto w-full max-w-screen-lg bg-white rounded-xl py-2 flex flex-col relative px-2`}
+                    className={` w-full max-w-screen-lg bg-white rounded-xl py-2 flex flex-col relative px-2 mx-2`}
                     onClick={event => event.stopPropagation()}>
                     <AiOutlineClose className='absolute left-4 top-3 text-2xl text-red-600 cursor-pointer ' onClick={onDismiss} />
                     <div className='w-full h-10 flex items-center mb-1 border-b !border-gray-300'>

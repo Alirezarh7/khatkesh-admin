@@ -14,7 +14,7 @@ const axiosConfig = axios.create({
 });
 
 axiosConfig.interceptors.request.use((config) => {
-  const Token = localStorage.getItem('auth');
+  const Token = localStorage.getItem('auth-storage');
   const tokenObj = Token ? JSON.parse(Token).state.token : null;
     if (tokenObj) {
         config.headers['Authorization'] = 'Bearer ' + tokenObj;

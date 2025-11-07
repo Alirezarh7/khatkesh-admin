@@ -17,7 +17,7 @@ type FormValues = {
   title: string;
   description: string;
 };
-const CreateAndEditRoleModal = ({isOpen, onClose}: IProps) => {
+const  CreateAndEditRoleModal = ({isOpen, onClose}: IProps) => {
   const [selected, setSelected] = useState<SelectedState>({});
 
   // تبدیل برای ارسال به بک‌اند (مثال: آرایه‌ای از { groupId, permissionId })
@@ -37,7 +37,7 @@ const CreateAndEditRoleModal = ({isOpen, onClose}: IProps) => {
   });
   const {mutate} = useRegister()
   const onSubmit = async (values: FormValues) => {
-    console.log(values)
+
     console.log("payload to backend:", payload);
     mutate({title: values.title, description: values.description}, {
         onSuccess: (value) => {

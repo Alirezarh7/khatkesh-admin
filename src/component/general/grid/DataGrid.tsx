@@ -25,8 +25,8 @@ interface IProps {
   onEdit?: (row: Record<string, any>) => void;
   onSubDelete?: (row: Record<string, any>) => void;
   onSubEdit?: (row: Record<string, any>) => void;
-  setCurrentPage: any
-  currentPage: number
+  setCurrentPage?: any
+  currentPage?: number
 }
 
 
@@ -69,18 +69,18 @@ const DataGrid = ({
       <div className="max-md:hidden p-2">
         <div className=" w-full overflow-x-auto">
           <table className="table-auto w-full text-right text-sm">
-            <thead className="bg-sliderBlueColor text-white text-sm ">
+            <thead className="bg-gradient-to-r from-indigo-800 to-purple-800 text-white text-sm ">
             <tr className={'text-center'}>
-              {RowNumber && <th className="p-1 border border-goldColor whitespace-nowrap">ردیف</th>}
+              {RowNumber && <th className="p-1 border border-amber-500 whitespace-nowrap">ردیف</th>}
               {headData?.map((item, index) => {
                 if (!item) return null
                 return (
                   <th key={index}
-                      className="p-1 border border-goldColor whitespace-nowrap">{item.title}</th>
+                      className="p-1 border border-amber-500 whitespace-nowrap">{item.title}</th>
                 )
               })}
               {(onAdd || onEdit || onPrint || onDelete || onView) &&
-                  <th className="p-1 border border-goldColor whitespace-nowrap">عملیات</th>}
+                  <th className="p-1 border border-amber-500 whitespace-nowrap">عملیات</th>}
             </tr>
             </thead>
             <tbody className="text-center">
@@ -93,14 +93,14 @@ const DataGrid = ({
                     className={`${item.status === 1 ? 'bg-gray-300' : ''}`}
                   >
                     {RowNumber && (
-                      <td className="p-1 border border-goldColor whitespace-nowrap">
+                      <td className="p-1 border border-amber-700 whitespace-nowrap">
                         {index + 1}
                       </td>
                     )}
                     {headData?.map((headItem, idx) => {
                       if (!headItem) return null
                       return (
-                        <td key={idx} className="p-1 border border-goldColor whitespace-nowrap">
+                        <td key={idx} className="p-1 border border-amber-700 whitespace-nowrap">
                           {headItem.numberInput ? (
                             <Controller
                               name={`items.${index}.${headItem.name}`}
@@ -117,7 +117,7 @@ const DataGrid = ({
                     })}
                     {/* شرط نمایش ستون عملیات برای هر سطر */}
                     {(onAdd || onEdit || onPrint || onDelete || onView) && (
-                      <td className="p-1 border border-goldColor">
+                      <td className="p-1 border border-amber-700">
                         <div className="flex justify-around items-center">
                           {onEdit && (
                             <div className={'flex flex-col justify-center items-center'}>
@@ -234,7 +234,7 @@ const DataGrid = ({
               <button
                 disabled={currentPage === 1}
                 onClick={() => {
-                  setCurrentPage(currentPage - 1);
+                  setCurrentPage(currentPage! - 1);
                 }}
                 className="px-3 m-1 py-1 border border-goldColor rounded hover:bg-gray-100 hover:text-black text-white disabled:opacity-50"
               >
@@ -248,7 +248,7 @@ const DataGrid = ({
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => {
-                  setCurrentPage(currentPage + 1);
+                  setCurrentPage(currentPage! + 1);
                 }}
                 className="px-3 m-1 py-1 border border-goldColor rounded hover:bg-gray-100 hover:text-black text-white disabled:opacity-50"
               >
@@ -381,7 +381,7 @@ const DataGrid = ({
               <button
                 disabled={currentPage === 1}
                 onClick={() => {
-                  setCurrentPage(currentPage - 1);
+                  setCurrentPage(currentPage! - 1);
                 }}
                 className="px-3  py-1 border border-goldColor rounded hover:bg-gray-100  disabled:opacity-50"
               >
@@ -394,7 +394,7 @@ const DataGrid = ({
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => {
-                  setCurrentPage(currentPage + 1);
+                  setCurrentPage(currentPage! + 1);
                 }}
                 className="px-3  py-1 border border-goldColor rounded hover:bg-gray-100  disabled:opacity-50"
               >
