@@ -7,7 +7,6 @@ import {useState} from "react";
 
 const ListManagementPage = () => {
   const {data} = useGetall()
-  console.log(data?.users.value)
 
   const headData = [
     {title: "اسم", key: "fullName"},

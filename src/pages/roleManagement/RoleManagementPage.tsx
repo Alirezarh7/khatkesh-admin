@@ -4,15 +4,15 @@ import Button from "../../component/general/button/Button.tsx";
 import {useModalStore, useSetDataStore} from "../../store/modalStore.ts";
 import CreateAndEditRoleModal from "../../component/pages/roleManagement/CreateAndEditRoleModal.tsx";
 import DataGrid from "../../component/general/grid/DataGrid.tsx";
-import {useRole} from "../../service/role.service.ts";
+import {useRole, useRowRoleData} from "../../service/role.service.ts";
 
 
 const RoleManagementPage = () => {
-  const {setDataTypeIdsAsync} = useSetDataStore()
+  const {setDataTypeIdsAsync, dataTypeIds} = useSetDataStore()
   const {modals, open, close} = useModalStore();
   const isOpenCreateAndEditRoleodal = modals['createAndEditRole'];
   const {data}= useRole()
-  console.log(data?.roles)
+  const {refetch:RowRoleDataRefetch}= useRowRoleData(dataTypeIds)
   const headData = [
     {title: "ایدی", key: "id"},
     {title: "نام دوره", key: "title"},
@@ -26,9 +26,16 @@ const RoleManagementPage = () => {
     })) ?? [],
     queryKey: 'getOrganSarfasls',
   }
-  const onEdit = () => {
-
+  const onEdit = (data:any) => {
+    setDataTypeIdsAsync(data.id).then(()=>{
+      RowRoleDataRefetch().then((value)=>{
+        setDataTypeIdsAsync(value.data).then(()=>{
+          open('createAndEditRole')
+        })
+      })
+    })
   }
+  console.log(dataTypeIds)
   const onDelete = () => {
 
   }
@@ -50,7 +57,7 @@ const RoleManagementPage = () => {
         </div>
 
       </DataSummary>
-      <CreateAndEditRoleModal isOpen={isOpenCreateAndEditRoleodal} onClose={() => close('createAndEditRole')}  />
+      <CreateAndEditRoleModal editRolment = {dataTypeIds}  isOpen={isOpenCreateAndEditRoleodal} onClose={() => close('createAndEditRole')}  />
     </>
   );
 };

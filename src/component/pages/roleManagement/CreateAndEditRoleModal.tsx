@@ -1,116 +1,135 @@
-import CustomModal from "../../general/modal/Modal.tsx";
-import {Controller, useForm} from "react-hook-form";
-import CustomInput from "../../general/input/Input.tsx";
-import CustomButton from "../../general/button/Button.tsx";
-import {useRegister} from "../../../service/role.service.ts";
-import type {PermissionGroup, SelectedState} from "../../../types/generalType.ts";
-import PermissionAccordion from "../../general/permissionAccordion/PermissionAccordion.tsx";
-import {useMemo, useState} from "react";
-import {enqueueSnackbar} from "notistack";
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import CustomModal from "../../general/modal/Modal";
+import CustomInput from "../../general/input/Input";
+import CustomButton from "../../general/button/Button";
+import PermissionAccordion from "../../general/permissionAccordion/PermissionAccordion";
+import type { SelectedState } from "../../../types/generalType";
+import { usePermissions} from "../../../service/role.service.ts";
 
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
+  editRolment?: any; // داده نقش برای حالت ویرایش
 }
 
 type FormValues = {
   title: string;
   description: string;
 };
-const  CreateAndEditRoleModal = ({isOpen, onClose}: IProps) => {
-  const [selected, setSelected] = useState<SelectedState>({});
 
-  // تبدیل برای ارسال به بک‌اند (مثال: آرایه‌ای از { groupId, permissionId })
-  const payload = useMemo(() => {
-    const out: Array<{ groupId: number; permissionId: number }> = [];
-    Object.entries(selected).forEach(([groupId, ids]) => {
-      ids.forEach((pid) => out.push({groupId: Number(groupId), permissionId: pid}));
-    });
-    return out;
-  }, [selected]);
+const CreateAndEditRoleModal = ({ isOpen, onClose, editRolment }: IProps) => {
+  console.log(editRolment)
+  const [selected, setSelected] = useState<SelectedState>({});
+  const { data: permissions, isLoading } = usePermissions();
+
   const {
     control,
     handleSubmit,
+    reset,
   } = useForm<FormValues>({
     mode: "onTouched",
-    defaultValues: {title: '', description: ''},
+    defaultValues: { title: "", description: "" },
   });
-  const {mutate} = useRegister()
-  const onSubmit = async (values: FormValues) => {
 
-    console.log("payload to backend:", payload);
-    mutate({title: values.title, description: values.description}, {
-        onSuccess: (value) => {
-            console.log(value)
-            onClose()
-        },
-        onError: (err) => {
-            console.log(err)
-            enqueueSnackbar(err.message, {variant: 'error'})
-        }
-    })
+  useEffect(() => {
+    if (!permissions) return;
+
+    if (editRolment?.role) {
+      reset({
+        title: editRolment.role.title ?? "",
+        description: editRolment.role.description ?? "",
+      });
+
+      const selectedIds = new Set(editRolment.role.permissions.map((p: any) => p.id));
+      const next: SelectedState = {};
+      permissions.forEach((group:any) => {
+        const checkedIds = group.value
+          .filter((perm:any) => selectedIds.has(perm.id))
+          .map((perm:any) => perm.id);
+        if (checkedIds.length > 0) next[group.id] = checkedIds;
+      });
+
+      setSelected(next);
+    } else {
+      reset({ title: "", description: "" });
+      setSelected({});
+    }
+  }, [editRolment, permissions, reset]);
+
+
+  const payload = useMemo(() => {
+    const out: Array<{ groupId: number; permissionIds: number[] }> = [];
+    Object.entries(selected).forEach(([groupId, ids]) => {
+      out.push({ groupId: Number(groupId), permissionIds: ids });
+    });
+    return out;
+  }, [selected]);
+
+  const onSubmit = (values: FormValues) => {
+    const body = {
+      roleId: editRolment?.id ?? 0,
+      title: values.title,
+      description: values.description,
+      permissions: payload,
+    };
+    console.log("✅ ارسال به بک‌اند:", body);
   };
-  const data: PermissionGroup[] = [
-    {
-      id: 1, title: "مدیریت کاربران", value: [
-        {id: 1, permision: "aljfdlaf"},
-        {id: 2, permision: "aaa"},
-        {id: 3, permision: "ddd"},
-        {id: 4, permision: "fff"},
-      ]
-    },
-    {
-      id: 2, title: "مدیریت نوشته‌ها", value: [
-        {id: 1, permision: "poikl"},
-        {id: 2, permision: "zxcv"},
-        {id: 3, permision: "uik"},
-        {id: 4, permision: "qwer"},
-      ]
-    },
-    {
-      id: 3, title: "مدیریت محصولات", value: [
-        {id: 1, permision: "777"},
-        {id: 2, permision: "98"},
-        {id: 3, permision: "32"},
-        {id: 4, permision: "120"},
-      ]
-    },
-    {
-      id: 4, title: "مدیریت تخفیف‌ها", value: [
-        {id: 1, permision: "55"},
-        {id: 2, permision: "66"},
-        {id: 3, permision: "44"},
-        {id: 4, permision: "258"},
-      ]
-    },
-  ];
 
   return (
-    <CustomModal isOpen={isOpen} title={'ایجاد نقش'}
-                 footerData={
-                   <>
-                     <CustomButton label={'ذخیره'} onClick={handleSubmit(onSubmit)} type={'submit'}
-                                   variant='InputClass'/>
-                     <CustomButton label={'بستن'} onClick={onClose} type={'button'} variant='Cancel'/>
-                   </>
-                 }
-                 onDismiss={onClose}>
-
-      <form onSubmit={handleSubmit(onSubmit)} className={'w-full grid grid-cols-1 md:grid-cols-2 mx-auto gap-3 m-2'}>
-        <div className={'flex flex-col gap-2'}>
-          <Controller name={'title'} control={control} render={({field: {value, onChange}}) => (
-            <CustomInput placeholder={'عنوان'} value={value} onChange={onChange}/>)}
+    <CustomModal
+      isOpen={isOpen}
+      title={editRolment?.role?.title? "ویرایش نقش" : "ایجاد نقش"}
+      onDismiss={onClose}
+      footerData={
+        <>
+          <CustomButton
+            label="ذخیره"
+            onClick={handleSubmit(onSubmit)}
+            type="submit"
+            variant="InputClass"
           />
-          <Controller name={'description'} control={control} render={({field: {value, onChange}}) => (
-            <CustomInput placeholder={'دوره'} isTextArea={true} value={value}
-                         onChange={onChange}/>)}
+          <CustomButton label="بستن" onClick={onClose} type="button" variant="Cancel" />
+        </>
+      }
+    >
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full grid grid-cols-1 md:grid-cols-2 mx-auto gap-3 m-2"
+      >
+        <div className="flex flex-col gap-2">
+          <Controller
+            name="title"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <CustomInput placeholder="عنوان نقش" value={value} onChange={onChange} />
+            )}
+          />
+          <Controller
+            name="description"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <CustomInput
+                placeholder="توضیحات نقش"
+                isTextArea
+                value={value}
+                onChange={onChange}
+              />
+            )}
           />
         </div>
-        <PermissionAccordion
-          data={data}
-          selected={selected}
-          onChange={setSelected}
-        />
+
+        {/* 📋 مجوزها */}
+        {isLoading ? (
+          <div className="text-center p-5">در حال بارگذاری مجوزها...</div>
+        ) : (
+          <PermissionAccordion
+            data={permissions ?? []}
+            selected={selected}
+            onChange={setSelected}
+          />
+        )}
       </form>
     </CustomModal>
   );
