@@ -12,36 +12,24 @@ const RoleManagementPage = () => {
   const {modals, open, close} = useModalStore();
   const isOpenCreateAndEditRoleodal = modals['createAndEditRole'];
   const {data}= useRole()
-  const dropdown = [
-    {title:'معلم',description:'برای تستستستستستستس',id:1,permisstionDropDown:[]},
-    {title:'اجرا',description:'برای تستستستستستستس',id:2},
-    {title:'ادمین',description:'برای تستستستستستستس',id:3},
-    {title:'گزارش',description:'برای تستستستستستستس',id:4},
-  ]
-  const permisstionDropDown = [
-    {title:'مدیریت کاربران',permission:{view:true,create:true,delete:true,edit:true}},
-    {title:'مدیریت نقش ها',permission:{view:true,create:false,delete:false,edit:true}},
-    {title:'مدیریت پرداخت ',permission:{view:true,create:true,delete:true,edit:true}},
-    {title:'گزارشات',permission:{view:false,create:false,delete:false,edit:false}},
-    {title:'لیست دوره ها',permission:{view:true,create:false,delete:false,edit:true}},
-  ]
+  console.log(data?.roles)
   const headData = [
     {title: "ایدی", key: "id"},
     {title: "نام دوره", key: "title"},
     {title: "توضیحات", key: "description"},
   ];
   const bodyData = {
-    item: dropdown.map((destructure) => ({
+    item: data?.roles?.value.map((destructure) => ({
       title:destructure.title,
       id:destructure.id,
       description:destructure.description,
     })) ?? [],
     queryKey: 'getOrganSarfasls',
   }
-  const onEdit = (data: any) => {
+  const onEdit = () => {
 
   }
-  const onDelete = (data: any) => {
+  const onDelete = () => {
 
   }
   return (
