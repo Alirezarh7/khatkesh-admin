@@ -1,9 +1,9 @@
 import axiosConfig from "../baseURL/axiosConfig.ts";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import type {RoleType} from "../types/roleType.ts";
+import type {RoleCreateAndEdit, RoleType} from "../types/roleType.ts";
 
-const register = async (data:{ title: string, description: string }) => {
-  const response = await axiosConfig.post(`/users/back/Role/register`,data);
+const register = async (data:RoleCreateAndEdit) => {
+  const response = await axiosConfig.post(`/users/back/Role/Register`,data);
   return response.data;
 };
 
@@ -11,6 +11,16 @@ export const useRegister = () => {
   return useMutation({
     mutationFn: register
   });
+}
+const EditRole = async (data:{ title: string, description: string }) => {
+    const response = await axiosConfig.post(`/users/back/Role/Edit`,data);
+    return response.data;
+};
+
+export const useEditRole = () => {
+    return useMutation({
+        mutationFn: EditRole
+    });
 }
 
 const roleData = async () => {
