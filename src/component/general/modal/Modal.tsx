@@ -37,7 +37,7 @@ const CustomModal = ({ isOpen, title = 'My Modal', onDismiss, children, footerDa
                     <div className='w-full h-10 flex items-center mb-1 border-b !border-gray-300'>
                         <h1 className='text-lg text-gray-500 font-bold'>{title}</h1>
                     </div>
-                    <div className={`h-full justify-items-center my-auto min-h-[150px] max-md:max-h-[490px] max-h-[390px]  overflow-y-hidden`}>
+                    <div className={`h-full justify-items-center my-auto min-h-[150px] max-md:max-h-[490px] max-h-[390px] overflow-y-auto overflow-x-hidden`}>
                         {children}
                     </div>
                     {footerData ? (
