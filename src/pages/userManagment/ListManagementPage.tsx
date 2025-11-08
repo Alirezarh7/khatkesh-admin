@@ -1,17 +1,20 @@
 import Breadcrumb from "../../component/general/breadCrumb/Breadcrumb.tsx";
-import {useGetall} from "../../service/user.service.ts";
+import {useGetall, useRowDataForEdit} from "../../service/user.service.ts";
 import DataGrid from "../../component/general/grid/DataGrid.tsx";
 import {useState} from "react";
 import Button from "../../component/general/button/Button.tsx";
 import {useModalStore, useSetDataStore} from "../../store/modalStore.ts";
 import CreateEditUserModal from "../../component/pages/listManagment/CreateEditUserModal.tsx";
+import DeleteUserModal from "../../component/pages/listManagment/DeleteUserModal.tsx";
 
 
 const ListManagementPage = () => {
   const {data} = useGetall()
   const {setDataTypeIdsAsync, dataTypeIds} = useSetDataStore()
   const {modals, open, close} = useModalStore();
+  const {refetch:rowDataForEditRefetch}=useRowDataForEdit(dataTypeIds)
   const createEditUserModal = modals['createEditUserModal'];
+  const deleteUserModal = modals['deleteUserModal'];
   const headData = [
     {title: "اسم", key: "fullName"},
     {title: "ایمیل", key: "email"},
@@ -30,8 +33,20 @@ const ListManagementPage = () => {
       id: userData.id,
     })) ?? [],
   }
-  const onEdit = ()=>{}
-  const onDelete = ()=>{}
+  const onEdit = (data:any)=>{
+    setDataTypeIdsAsync(data.email).then(()=>{
+      rowDataForEditRefetch().then((value)=>{
+        setDataTypeIdsAsync(value.data).then(()=>{
+          open('createEditUserModal')
+        })
+      })
+    })
+  }
+  const onDelete = (data:any)=>{
+    setDataTypeIdsAsync(data.email).then(()=>{
+      open('deleteUserModal')
+    })
+  }
   return (
     <>
       <Breadcrumb />
@@ -49,6 +64,7 @@ const ListManagementPage = () => {
         <DataGrid setCurrentPage={setCurrentPage} currentPage={currentPage} bodyData={bodyData} headData={headData} onEdit={onEdit} onDelete={onDelete}/>
       </div>
       <CreateEditUserModal isOpen={createEditUserModal} onDismiss={()=>close('createEditUserModal')} />
+      <DeleteUserModal editRolment = {dataTypeIds}  isOpen={deleteUserModal} onClose={() => close('deleteUserModal')}  />
     </>
   );
 };

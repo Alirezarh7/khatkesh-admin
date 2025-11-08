@@ -14,6 +14,19 @@ export const useGetall = () => {
   });
 };
 
+const getRowDataForEdit = async (email:string) => {
+  const response = await axiosConfig.get(`/users/back/User/get?Email=${email}`);
+  return response.data;
+};
+
+export const useRowDataForEdit = (email:string) => {
+  return useQuery({
+    enabled:false,
+    queryFn:()=>getRowDataForEdit(email),
+    queryKey:['getRowDataForEdit']
+  });
+};
+
 const editUser = async (data:UserFormValues) => {
   const response = await axiosConfig.post(`/users/back/User/Edit`,data);
   return response.data;
@@ -35,3 +48,16 @@ export const useCreateUser = () => {
     mutationFn: createUser
   });
 }
+
+const DeleteUser = async (data: { email: string }) => {
+  const response = await axiosConfig.delete(`/users/back/User/delete`, {
+    data,
+  });
+  return response.data;
+};
+
+export const useDeleteUser = () => {
+  return useMutation({
+    mutationFn: DeleteUser,
+  });
+};
