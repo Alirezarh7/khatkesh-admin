@@ -100,27 +100,27 @@ const CustomSidebar = () => {
     return (
         <div className="relative">
             <RiMenuFold3Line
-                className="md:hidden text-borderColor w-11 h-11 cursor-pointer inline-flex items-center p-2"
+                className="md:hidden text-black w-11 h-11 cursor-pointer inline-flex items-center p-2"
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
             />
             {isSidebarOpen && (
                 <div
-                    className="md:hidden fixed inset-0 bg-text bg-opacity-50 z-30"
+                    className="md:hidden fixed inset-0 bg-black/60  z-20"
                     onClick={() => setSidebarOpen(false)}
                 />
             )}
 
             {/* ⚠️ این بخش باید template string با backtick باشه */}
             <div
-                className={`fixed top-0 right-0 z-40 border-l border-borderColor w-72 h-screen bg-gradient-to-r from-textColor/70 transition-transform duration-700 transform ${
+                className={`fixed top-0 right-0 z-30 bg-white border-l border-text w-72 h-screen  transition-transform duration-700 transform ${
                     isSidebarOpen ? "translate-x-0" : "translate-x-full"
                 } md:translate-x-0`}
             >
-                <div className="flex justify-around items-center w-full border-b-4 bg-white border-borderColor">
+                <div className="flex justify-around items-center w-full border-b-4 bg-white border-text">
                     <img className="p-3" src="/logo.png" height={60} width={60} alt="Arm" />
                 </div>
 
-                <nav className="flex flex-col">
+                <nav className="flex flex-col bg-white">
                     {visibleDropDownData.map((item) => (
                         <CustomDropDownSlider
                             key={item.id}
