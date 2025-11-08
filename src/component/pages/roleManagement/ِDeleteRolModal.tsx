@@ -44,7 +44,7 @@ const DeleteRolModal = ({onClose, isOpen, editRolment}: IProps) => {
         </>
       }
     >
-      <div className={'w-full flex items-center justify-center p-2 '}>
+      <div className={'w-full flex items-center justify-center  '}>
         <strong>آیا از حذف ایتم خود اطمینان دارید ؟</strong>
       </div>
     </CustomModal>

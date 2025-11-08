@@ -23,16 +23,18 @@ export const useEditRole = () => {
     });
 }
 
-const DeleteRole = async (data:{ id:number }) => {
-  const response = await axiosConfig.delete(`/users/back/Role/Delete`,data);
+const DeleteRole = async (data: { id: number }) => {
+  const response = await axiosConfig.delete(`/users/back/Role/Delete`, {
+    data, // یعنی { data: { id: ... } }
+  });
   return response.data;
 };
 
 export const useDeleteRole = () => {
   return useMutation({
-    mutationFn: DeleteRole
+    mutationFn: DeleteRole,
   });
-}
+};
 
 const roleData = async () => {
     const response = await axiosConfig.get<RoleType>(`/users/back/Role/GetAll`);
