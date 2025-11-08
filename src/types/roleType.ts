@@ -24,5 +24,5 @@ export interface RoleType {
 export interface RoleCreateAndEdit {
     title: string,
     description: string,
-    permissionIds: []
+    permissionIds: number[]
 }

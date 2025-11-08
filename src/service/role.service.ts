@@ -13,7 +13,7 @@ export const useRegister = () => {
   });
 }
 const EditRole = async (data:{ title: string, description: string }) => {
-    const response = await axiosConfig.post(`/users/back/Role/Edit`,data);
+    const response = await axiosConfig.put(`/users/back/Role/Edit`,data);
     return response.data;
 };
 
@@ -21,6 +21,17 @@ export const useEditRole = () => {
     return useMutation({
         mutationFn: EditRole
     });
+}
+
+const DeleteRole = async (data:{ id:number }) => {
+  const response = await axiosConfig.delete(`/users/back/Role/Delete`,data);
+  return response.data;
+};
+
+export const useDeleteRole = () => {
+  return useMutation({
+    mutationFn: DeleteRole
+  });
 }
 
 const roleData = async () => {

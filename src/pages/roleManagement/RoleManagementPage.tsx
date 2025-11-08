@@ -4,15 +4,18 @@ import Button from "../../component/general/button/Button.tsx";
 import {useModalStore, useSetDataStore} from "../../store/modalStore.ts";
 import CreateAndEditRoleModal from "../../component/pages/roleManagement/CreateAndEditRoleModal.tsx";
 import DataGrid from "../../component/general/grid/DataGrid.tsx";
-import {useRole, useRowRoleData} from "../../service/role.service.ts";
+import { useRole, useRowRoleData} from "../../service/role.service.ts";
+import DeleteRolModal from "../../component/pages/roleManagement/ِDeleteRolModal.tsx";
 
 
 const RoleManagementPage = () => {
   const {setDataTypeIdsAsync, dataTypeIds} = useSetDataStore()
   const {modals, open, close} = useModalStore();
   const isOpenCreateAndEditRoleodal = modals['createAndEditRole'];
+  const isOpenDeleteRolModal = modals['deleteRolModal'];
   const {data}= useRole()
   const {refetch:RowRoleDataRefetch}= useRowRoleData(dataTypeIds)
+
   const headData = [
     {title: "ایدی", key: "id"},
     {title: "نام دوره", key: "title"},
@@ -35,9 +38,10 @@ const RoleManagementPage = () => {
       })
     })
   }
-  console.log(dataTypeIds)
-  const onDelete = () => {
-
+  const onDelete = (data:any) => {
+    setDataTypeIdsAsync(data.id).then(()=>{
+          open('deleteRolModal')
+    })
   }
   return (
     <>
@@ -58,6 +62,7 @@ const RoleManagementPage = () => {
 
       </DataSummary>
       <CreateAndEditRoleModal editRolment = {dataTypeIds}  isOpen={isOpenCreateAndEditRoleodal} onClose={() => close('createAndEditRole')}  />
+      <DeleteRolModal editRolment = {dataTypeIds}  isOpen={isOpenDeleteRolModal} onClose={() => close('deleteRolModal')}  />
     </>
   );
 };

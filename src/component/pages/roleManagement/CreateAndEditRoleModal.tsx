@@ -9,6 +9,7 @@ import type {SelectedState} from "../../../types/generalType";
 import {useEditRole, usePermissions, useRegister} from "../../../service/role.service.ts";
 import {enqueueSnackbar} from "notistack";
 import RulerLoadingOverlay from "../../general/rulerLoading/RulerLoading.tsx";
+import {useQueryClient} from "@tanstack/react-query";
 
 interface IProps {
     isOpen: boolean;
@@ -22,11 +23,12 @@ type FormValues = {
 };
 
 const CreateAndEditRoleModal = ({isOpen, onClose, editRolment}: IProps) => {
-    console.log(editRolment)
+
     const [selected, setSelected] = useState<SelectedState>({});
     const {data: permissions, isLoading} = usePermissions();
     const {mutate: RegisterMutate, isPending: RegisterPending} = useRegister();
     const {mutate: EditRoleMutate, isPending: EditRolePending} = useEditRole();
+    const queryClient = useQueryClient();
 
     const {
         control,
@@ -64,34 +66,52 @@ const CreateAndEditRoleModal = ({isOpen, onClose, editRolment}: IProps) => {
     }, [editRolment, permissions, reset]);
 
 
-    const payload = useMemo(() => {
-        const out: Array<{ groupId: number; permissionIds: number[] }> = [];
-        Object.entries(selected).forEach(([groupId, ids]) => {
-            out.push({groupId: Number(groupId), permissionIds: ids});
+    const permissionIds = useMemo(() => {
+        const out: number[] = [];
+        Object.values(selected).forEach((ids) => {
+            out.push(...ids);         // همه رو می‌ریزیم تو یه آرایه
         });
         return out;
     }, [selected]);
 
     const onSubmit = (values: FormValues) => {
-        if (!watch('title')) {
-            enqueueSnackbar('عنوان برای سهمیه انتحاب نشده است', {variant: 'warning'})
-        } else if (!watch('description')) {
-            enqueueSnackbar('دوره برای سهمیه انتحاب نشده است', {variant: 'warning'})
-        } else if (payload.length === 0) {
-            enqueueSnackbar('زیر دوره برای سهمیه انتحاب نشده است', {variant: 'warning'})
-        } else {
-            const body = {
-                roleId: editRolment?.id ?? 0,
-                title: values.title,
-                description: values.description,
-                permissions: payload,
-            };
-            if (values.description) {
-                EditRoleMutate(Object.assign(body, {roleId: editRolment.roleId}));
-            }
-            console.log("✅ ارسال به بک‌اند:", body);
+        if (!watch("title")) {
+            enqueueSnackbar("عنوان نقش وارد نشده است", { variant: "warning" });
+            return;
         }
+        if (!watch("description")) {
+            enqueueSnackbar("توضیحات نقش وارد نشده است", { variant: "warning" });
+            return;
+        }
+        if (permissionIds.length === 0) {
+            enqueueSnackbar("دسترسی وارد نشده است", { variant: "warning" });
+            return;
+        }
+        const body = {
+            title: values.title,
+            description: values.description,
+            permissionIds,
+        };
+        if (editRolment?.role?.id) {
+            EditRoleMutate(Object.assign(body, {roleId: editRolment?.role?.id}),{onSuccess:()=>{
+                    queryClient.invalidateQueries({queryKey: ['roleData']}).then(() => {
+                        enqueueSnackbar('اپدیت با موقعیت انجام شد', { variant: "success" })
+                        onClose()
+                    })
+                }});
+        } else {
+            RegisterMutate(body,{onSuccess:()=>{
+                    queryClient.invalidateQueries({queryKey: ['roleData']}).then(() => {
+                        enqueueSnackbar('نقش با موقعیت اضافه شد', { variant: "success" });
+                        onClose()
+                    })
+                }});
+        }
+
+        console.log("✅ ارسال به بک‌اند:", body);
     };
+
+
 
     return (
         <>

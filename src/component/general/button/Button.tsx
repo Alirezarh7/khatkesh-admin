@@ -32,7 +32,7 @@ const CustomButton = ({
     const outLineClasses =
         " w-fit !text-foreground min-w-32 cursor-pointer text-sm bg-card focus:ring-4 focus:outline-none border border-primary focus:ring-[var(--chatBotColor)] font-medium rounded-lg  p-2.5 text-center m-2 ";
     const CancelClasses = " w-fit text-white text-sm bg-gradient-to-r from-red-700 to-red-300 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-gridColor font-medium rounded-lg  p-2.5 text-center  m-2  ";
-    const InputClass = 'w-fit text-white text-sm bg-gradient-to-r from-indigo-600 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-gridColor font-medium rounded-lg  p-2.5 text-center  m-2  ';
+    const InputClass = ' w-fit text-white text-sm focus:ring-indigo-500 disabled:opacity-60 bg-gradient-to-r from-indigo-600 to-purple-600 font-medium rounded-lg  p-2.5 text-center  m-2';
 
     const classNameCreator = (): string => {
         let finalClassName = `${disabled ? "disabled" : "enable"} outline-none duration-300 py-2  text-text  font-semibold `;
