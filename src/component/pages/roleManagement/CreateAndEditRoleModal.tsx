@@ -68,9 +68,19 @@ const CreateAndEditRoleModal = ({isOpen, onClose, editRolment}: IProps) => {
 
     const permissionIds = useMemo(() => {
         const out: number[] = [];
-        Object.values(selected).forEach((ids) => {
-            out.push(...ids);         // همه رو می‌ریزیم تو یه آرایه
+
+        Object.entries(selected).forEach(([groupId, ids]) => {
+            const selectedIds = ids as number[];
+
+            if (selectedIds.length > 0) {
+                // 👈 اول خود id گروه
+                out.push(Number(groupId));
+
+                // 👈 بعد id همه‌ی permissionهای انتخاب‌شده‌ی اون گروه
+                out.push(...selectedIds);
+            }
         });
+
         return out;
     }, [selected]);
 

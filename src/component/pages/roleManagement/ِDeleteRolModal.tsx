@@ -12,7 +12,6 @@ interface IProps {
 
 const DeleteRolModal = ({onClose, isOpen, editRolment}: IProps) => {
   const {mutate} = useDeleteRole()
-  console.log(editRolment)
   const queryClient = useQueryClient();
   const deletData = () => {
     mutate(
