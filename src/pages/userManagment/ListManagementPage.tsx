@@ -25,12 +25,12 @@ const ListManagementPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const bodyData = {
     item: data?.users.value?.map((userData: any) => ({
-      fullName: userData.firstName + ' ' + userData.lastName,
-      email: userData.email.value,
-      is_Verify: userData.is_Verify ? '✅' : '❌',
-      username: userData.username.value,
-      type: userData.type,
-      id: userData.id,
+      fullName: userData?.firstName + ' ' + userData.lastName,
+      email: userData?.email,
+      is_Verify: userData?.is_Verify ? '✅' : '❌',
+      username: userData?.username,
+      type: userData?.type,
+      id: userData?.id,
     })) ?? [],
   }
   const onEdit = (data:any)=>{
