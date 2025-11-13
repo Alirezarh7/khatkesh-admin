@@ -9,8 +9,8 @@ export type UserFormValues = {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-  password_confirm: string;
+  password: string| number;
+  password_confirm: string| number;
   username: string;
   userType: string;
   role: number | string;

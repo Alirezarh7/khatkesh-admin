@@ -63,8 +63,8 @@ const CreateEditUserModal = ({isOpen, onDismiss, editUser,}: IProps) => {
         userType: editUser.user.value.type ?? "",
         role: editUser.user.value.roles?.[0]?.id ?? "",
         is_Verify: editUser.user.value.is_Verify ?? true,
-        password: "",
-        password_confirm: "",
+        password: 0,
+        password_confirm: 0,
       });
     } else {
       reset({
