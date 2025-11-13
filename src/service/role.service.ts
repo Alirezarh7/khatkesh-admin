@@ -1,9 +1,9 @@
-import axiosConfig from "../baseURL/axiosConfig.ts";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import type {RoleCreateAndEdit, RoleType} from "../types/roleType.ts";
+import {axiosUser} from "../baseURL/axios";
 
 const register = async (data:RoleCreateAndEdit) => {
-  const response = await axiosConfig.post(`/users/back/Role/Register`,data);
+  const response = await axiosUser.post(`/users/back/Role/Register`,data);
   return response.data;
 };
 
@@ -13,7 +13,7 @@ export const useRegister = () => {
   });
 }
 const EditRole = async (data:{ title: string, description: string }) => {
-    const response = await axiosConfig.put(`/users/back/Role/Edit`,data);
+    const response = await axiosUser.put(`/users/back/Role/Edit`,data);
     return response.data;
 };
 
@@ -24,7 +24,7 @@ export const useEditRole = () => {
 }
 
 const DeleteRole = async (data: { id: number }) => {
-  const response = await axiosConfig.delete(`/users/back/Role/Delete`, {
+  const response = await axiosUser.delete(`/users/back/Role/Delete`, {
     data, // یعنی { data: { id: ... } }
   });
   return response.data;
@@ -37,7 +37,7 @@ export const useDeleteRole = () => {
 };
 
 const roleData = async () => {
-    const response = await axiosConfig.get<RoleType>(`/users/back/Role/GetAll`);
+    const response = await axiosUser.get<RoleType>(`/users/back/Role/GetAll`);
     return response.data;
 };
 
@@ -52,7 +52,7 @@ export const usePermissions = () => {
   return useQuery({
     queryKey: ["permissions"],
     queryFn: async () => {
-      const { data } = await axiosConfig.get("/users/back/Permission/getAll");
+      const { data } = await axiosUser.get("/users/back/Permission/getAll");
       const items = data.permissions.value.map((group: any) => ({
         id: group.id,
         title: group.description,
@@ -66,7 +66,7 @@ export const usePermissions = () => {
   });
 };
 const rowRoleData = async (id:number) => {
-  const response = await axiosConfig.get(`/users/back/Role/Get?id=${id}`);
+  const response = await axiosUser.get(`/users/back/Role/Get?id=${id}`);
   return response.data;
 };
 

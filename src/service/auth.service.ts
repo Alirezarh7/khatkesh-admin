@@ -1,8 +1,8 @@
 import {useMutation} from "@tanstack/react-query";
-import axiosConfig from "../baseURL/axiosConfig.ts";
+import {axiosUser} from "../baseURL/axios";
 
 const login = async (data: {email:string,password:string}) => {
-  const response = await axiosConfig.post(`/users/back/Auth/login`, data);
+  const response = await axiosUser.post(`/users/back/Auth/login`, data);
   return response.data;
 };
 
@@ -13,7 +13,7 @@ export const useLogin = () => {
 };
 
 const logout = async () => {
-  const response = await axiosConfig.post(`/users/back/Auth/logout`);
+  const response = await axiosUser.post(`/users/back/Auth/logout`);
   return response.data;
 };
 

@@ -1,4 +1,4 @@
-const baseUrls = {
-    Interanl: 'http://localhost:7001/',
-};
-export const currentBaseUrl: string = baseUrls.Interanl;
+export const baseUrls = {
+    userManagementPanel: "http://localhost:7001/",
+    productsService: "http://localhost:7002/",
+} as const;
