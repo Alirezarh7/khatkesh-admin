@@ -28,7 +28,7 @@ export const useRowDataForEdit = (email:string) => {
 };
 
 const editUser = async (data:UserFormValues) => {
-  const response = await axiosConfig.post(`/users/back/User/Edit`,data);
+  const response = await axiosConfig.put(`/users/back/User/Edit`,data);
   return response.data;
 };
 
@@ -49,9 +49,9 @@ export const useCreateUser = () => {
   });
 }
 
-const DeleteUser = async (data: { email: string }) => {
-  const response = await axiosConfig.delete(`/users/back/User/delete`, {
-    data,
+const DeleteUser = async (email: string) => {
+  const response = await axiosConfig.delete(`/users/back/User/Delete`, {
+    params: { email }
   });
   return response.data;
 };

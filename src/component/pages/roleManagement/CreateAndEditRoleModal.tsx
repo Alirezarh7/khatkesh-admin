@@ -14,7 +14,7 @@ import {useQueryClient} from "@tanstack/react-query";
 interface IProps {
     isOpen: boolean;
     onClose: () => void;
-    editRolment?: any; // داده نقش برای حالت ویرایش
+    editRolment?: any;
 }
 
 type FormValues = {
@@ -73,7 +73,7 @@ const CreateAndEditRoleModal = ({isOpen, onClose, editRolment}: IProps) => {
             const selectedIds = ids as number[];
 
             if (selectedIds.length > 0) {
-                // 👈 اول خود id گروه
+
                 out.push(Number(groupId));
 
                 // 👈 بعد id همه‌ی permissionهای انتخاب‌شده‌ی اون گروه
@@ -117,7 +117,6 @@ const CreateAndEditRoleModal = ({isOpen, onClose, editRolment}: IProps) => {
                     })
                 }});
         }
-
         console.log("✅ ارسال به بک‌اند:", body);
     };
 

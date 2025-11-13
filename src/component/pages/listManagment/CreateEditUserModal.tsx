@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
-import { enqueueSnackbar } from "notistack";
+import {useEffect} from "react";
+import {Controller, useForm} from "react-hook-form";
+import {useQueryClient} from "@tanstack/react-query";
+import {enqueueSnackbar} from "notistack";
 import CustomModal from "../../general/modal/Modal";
 import CustomInput from "../../general/input/Input";
 import CustomButton from "../../general/button/Button";
 import RulerLoadingOverlay from "../../general/rulerLoading/RulerLoading";
 import CustomSelect from "../../general/select/CustomSelect";
 import CustomToggle from "../../general/toggle/CustomToggle";
-import { useCreateUser, useEditeUser } from "../../../service/user.service";
-import { UserType } from "../../../data/GeneralData";
-import { useRole } from "../../../service/role.service";
+import {useCreateUser, useEditeUser} from "../../../service/user.service";
+import {UserType} from "../../../data/GeneralData";
+import {useRole} from "../../../service/role.service";
 import type {UserFormValues} from "../../../types/generalType.ts";
 
 interface IProps {
@@ -18,14 +18,15 @@ interface IProps {
   onDismiss: () => void;
   editUser?: any;
 }
-const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
-  const queryClient = useQueryClient();
 
+const CreateEditUserModal = ({isOpen, onDismiss, editUser,}: IProps) => {
+  const queryClient = useQueryClient();
   const {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    watch,
+    formState: {errors},
   } = useForm<UserFormValues>({
     mode: "onTouched",
     defaultValues: {
@@ -41,9 +42,9 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
     },
   });
 
-  const { mutate: createUser, isPending: createPending } = useCreateUser();
-  const { mutate: updateUser, isPending: updatePending } = useEditeUser();
-  const { data: roleData } = useRole();
+  const {mutate: createUser, isPending: createPending} = useCreateUser();
+  const {mutate: updateUser, isPending: updatePending} = useEditeUser();
+  const {data: roleData} = useRole();
 
   // map roles to select options
   const roleOptions =
@@ -53,15 +54,15 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
     })) ?? [];
 
   useEffect(() => {
-    if (editUser) {
+    if (editUser.user?.value) {
       reset({
-        firstName: editUser.firstName ?? "",
-        lastName: editUser.lastName ?? "",
-        email: editUser.email ?? "",
-        username: editUser.username ?? "",
-        userType: editUser.userType ?? "",
-        role: editUser.role ?? "",
-        is_Verify: editUser.is_Verify ?? true,
+        firstName: editUser.user.value.firstName ?? "",
+        lastName: editUser.user.value.lastName ?? "",
+        email: editUser.user.value.email ?? "",
+        username: editUser.user.value.username ?? "",
+        userType: editUser.user.value.type ?? "",
+        role: editUser.user.value.roles?.[0]?.id ?? "",
+        is_Verify: editUser.user.value.is_Verify ?? true,
         password: "",
         password_confirm: "",
       });
@@ -81,35 +82,10 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
   }, [editUser, reset]);
 
   const onSubmit = (values: UserFormValues) => {
-    if (!values.firstName) {
-      enqueueSnackbar("نام وارد نشده است", { variant: "warning" });
-      return;
-    }
-    if (!values.lastName) {
-      enqueueSnackbar("نام خانوادگی وارد نشده است", { variant: "warning" });
-      return;
-    }
     if (!values.email) {
-      enqueueSnackbar("ایمیل وارد نشده است", { variant: "warning" });
+      enqueueSnackbar("ایمیل وارد نشده است", {variant: "warning"});
       return;
     }
-    if (!editUser && !values.password) {
-      enqueueSnackbar("رمز عبور وارد نشده است", { variant: "warning" });
-      return;
-    }
-    if (values.password !== values.password_confirm) {
-      enqueueSnackbar("رمز عبور و تکرار آن یکسان نیست!", {
-        variant: "warning",
-      });
-      return;
-    }
-    if (!values.role) {
-      enqueueSnackbar("نقش کاربر وارد نشده است", {
-        variant: "warning",
-      });
-      return;
-    }
-
     const body = {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -122,11 +98,11 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
       is_Verify: Boolean(values.is_Verify),
     };
 
-    if (editUser?.id) {
+    if (editUser.user.value?.id) {
       updateUser(body,
         {
           onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["getAllUser"] }).then(() => {
+            queryClient.invalidateQueries({queryKey: ["getAllUser"]}).then(() => {
               enqueueSnackbar("کاربر با موفقیت ویرایش شد", {
                 variant: "success",
               });
@@ -138,7 +114,7 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
     } else {
       createUser(body, {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["getAllUser"] }).then(() => {
+          queryClient.invalidateQueries({queryKey: ["getAllUser"]}).then(() => {
             enqueueSnackbar("کاربر با موفقیت ایجاد شد", {
               variant: "success",
             });
@@ -160,23 +136,28 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
     type?: string;
     options?: { value: string | number; label: string }[];
   }[] = [
-    { name: "firstName", placeholder: "نام" },
-    { name: "lastName", placeholder: "نام خانوادگی" },
-    { name: "email", placeholder: "ایمیل", type: "email" },
-    { name: "username", placeholder: "شماره موبایل" },
-    { name: "userType", placeholder: "نوع کاربر", options: UserType },
-    { name: "role", placeholder: "نقش کاربر", options: roleOptions },
-    { name: "password", placeholder: "رمز عبور", type: "password" },
-    {
-      name: "password_confirm",
-      placeholder: "تکرار رمز عبور",
-      type: "password",
-    },
+    {name: "firstName", placeholder: "نام"},
+    {name: "lastName", placeholder: "نام خانوادگی"},
+    {name: "email", placeholder: "ایمیل", type: "email"},
+    {name: "username", placeholder: "شماره موبایل"},
+    {name: "password", placeholder: "رمز عبور", type: "password"},
+    {name: "password_confirm", placeholder: "تکرار رمز عبور", type: "password"},
   ];
+
+// 👇 فقط اگر نوع کاربر 'User' نیست، فیلد userType رو اضافه کن
+  if (watch("userType") !== "User") {
+    fields.splice(4, 0, {
+        name: "userType",
+        placeholder: "نوع کاربر",
+        options: UserType,
+      },
+      {name: "role", placeholder: "نقش کاربر", options: roleOptions},
+    );
+  }
 
   return (
     <>
-      <RulerLoadingOverlay open={loading} />
+      <RulerLoadingOverlay open={loading}/>
 
       <CustomModal
         isOpen={isOpen}
@@ -208,7 +189,7 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
               <Controller
                 control={control}
                 name={f.name}
-                render={({ field }) =>
+                render={({field}) =>
                   f.options ? (
                     <CustomSelect
                       options={f.options}
@@ -238,7 +219,7 @@ const CreateEditUserModal = ({ isOpen, onDismiss, editUser }: IProps) => {
             <Controller
               control={control}
               name="is_Verify"
-              render={({ field }) => (
+              render={({field}) => (
                 <CustomToggle
                   label="کاربر فعال باشد"
                   checked={!!field.value}

@@ -15,7 +15,7 @@ const DeleteUserModal = ({onClose, isOpen, editRolment}: IProps) => {
   const {mutate} = useDeleteUser()
   const deletData = () => {
     mutate(
-      {email: editRolment},
+      editRolment,
       {
         onSuccess: () => {
           queryClient.invalidateQueries({queryKey: ["getAllUser"]}).then(() => {

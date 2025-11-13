@@ -63,7 +63,7 @@ const ListManagementPage = () => {
 
         <DataGrid setCurrentPage={setCurrentPage} currentPage={currentPage} bodyData={bodyData} headData={headData} onEdit={onEdit} onDelete={onDelete}/>
       </div>
-      <CreateEditUserModal isOpen={createEditUserModal} onDismiss={()=>close('createEditUserModal')} />
+      <CreateEditUserModal isOpen={createEditUserModal} editUser={dataTypeIds} onDismiss={()=>close('createEditUserModal')} />
       <DeleteUserModal editRolment = {dataTypeIds}  isOpen={deleteUserModal} onClose={() => close('deleteUserModal')}  />
     </>
   );
