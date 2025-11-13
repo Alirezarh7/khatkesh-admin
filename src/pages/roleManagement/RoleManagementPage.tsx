@@ -4,7 +4,7 @@ import Button from "../../component/general/button/Button.tsx";
 import {useModalStore, useSetDataStore} from "../../store/modalStore.ts";
 import CreateAndEditRoleModal from "../../component/pages/roleManagement/CreateAndEditRoleModal.tsx";
 import DataGrid from "../../component/general/grid/DataGrid.tsx";
-import { useRole, useRowRoleData} from "../../service/role.service.ts";
+import { useRole, useRowRoleData} from "../../service/user/role.service.ts";
 import DeleteRolModal from "../../component/pages/roleManagement/ِDeleteRolModal.tsx";
 
 

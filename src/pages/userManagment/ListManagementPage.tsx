@@ -1,5 +1,5 @@
 import Breadcrumb from "../../component/general/breadCrumb/Breadcrumb.tsx";
-import {useGetall, useRowDataForEdit} from "../../service/user.service.ts";
+import {useGetall, useRowDataForEdit} from "../../service/user/user.service.ts";
 import DataGrid from "../../component/general/grid/DataGrid.tsx";
 import {useState} from "react";
 import Button from "../../component/general/button/Button.tsx";

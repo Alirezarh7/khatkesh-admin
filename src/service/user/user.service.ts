@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
-import type {UserFormValues} from "../types/generalType.ts";
-import {axiosUser} from "../baseURL/axios";
+import type {UserFormValues} from "../../types/generalType.ts";
+import {axiosUser} from "../../baseURL/axios";
 
 const getAllUser = async () => {
   const response = await axiosUser.get(`/users/back/User/getall`);

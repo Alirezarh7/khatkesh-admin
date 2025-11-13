@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
-import type {RoleCreateAndEdit, RoleType} from "../types/roleType.ts";
-import {axiosUser} from "../baseURL/axios";
+import type {RoleCreateAndEdit, RoleType} from "../../types/roleType.ts";
+import {axiosUser} from "../../baseURL/axios";
 
 const register = async (data:RoleCreateAndEdit) => {
   const response = await axiosUser.post(`/users/back/Role/Register`,data);

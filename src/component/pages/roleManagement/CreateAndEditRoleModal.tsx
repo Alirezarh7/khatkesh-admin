@@ -6,7 +6,7 @@ import CustomInput from "../../general/input/Input";
 import CustomButton from "../../general/button/Button";
 import PermissionAccordion from "../../general/permissionAccordion/PermissionAccordion";
 import type {SelectedState} from "../../../types/generalType";
-import {useEditRole, usePermissions, useRegister} from "../../../service/role.service.ts";
+import {useEditRole, usePermissions, useRegister} from "../../../service/user/role.service.ts";
 import {enqueueSnackbar} from "notistack";
 import RulerLoadingOverlay from "../../general/rulerLoading/RulerLoading.tsx";
 import {useQueryClient} from "@tanstack/react-query";

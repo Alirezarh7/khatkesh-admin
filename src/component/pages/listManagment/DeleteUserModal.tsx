@@ -2,7 +2,7 @@ import CustomModal from "../../general/modal/Modal.tsx";
 import CustomButton from "../../general/button/Button.tsx";
 import {enqueueSnackbar} from "notistack";
 import {useQueryClient} from "@tanstack/react-query";
-import {useDeleteUser} from "../../../service/user.service.ts";
+import {useDeleteUser} from "../../../service/user/user.service.ts";
 
 interface IProps {
   isOpen: boolean;

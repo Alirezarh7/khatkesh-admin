@@ -5,7 +5,7 @@ import CustomInput from "../../component/general/input/Input.tsx";
 import {RiLockPasswordFill} from "react-icons/ri";
 import {BsChatText} from "react-icons/bs";
 import CustomButton from "../../component/general/button/Button.tsx";
-import {useLogin} from "../../service/auth.service.ts";
+import {useLogin} from "../../service/user/auth.service.ts";
 import {AuthStore} from "../../store/authStore.ts";
 import RulerLoadingOverlay from "../../component/general/rulerLoading/RulerLoading.tsx";
 // import {enqueueSnackbar} from "notistack";

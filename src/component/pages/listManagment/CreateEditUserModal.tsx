@@ -8,9 +8,9 @@ import CustomButton from "../../general/button/Button";
 import RulerLoadingOverlay from "../../general/rulerLoading/RulerLoading";
 import CustomSelect from "../../general/select/CustomSelect";
 import CustomToggle from "../../general/toggle/CustomToggle";
-import {useCreateUser, useEditeUser} from "../../../service/user.service";
+import {useCreateUser, useEditeUser} from "../../../service/user/user.service.ts";
 import {UserType} from "../../../data/GeneralData";
-import {useRole} from "../../../service/role.service";
+import {useRole} from "../../../service/user/role.service.ts";
 import type {UserFormValues} from "../../../types/generalType.ts";
 
 interface IProps {

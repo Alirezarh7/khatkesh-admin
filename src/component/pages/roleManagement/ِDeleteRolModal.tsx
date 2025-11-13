@@ -1,6 +1,6 @@
 import CustomModal from "../../general/modal/Modal.tsx";
 import CustomButton from "../../general/button/Button.tsx";
-import {useDeleteRole} from "../../../service/role.service.ts";
+import {useDeleteRole} from "../../../service/user/role.service.ts";
 import {enqueueSnackbar} from "notistack";
 import {useQueryClient} from "@tanstack/react-query";
 

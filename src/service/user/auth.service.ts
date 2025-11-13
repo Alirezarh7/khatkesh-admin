@@ -1,5 +1,5 @@
 import {useMutation} from "@tanstack/react-query";
-import {axiosUser} from "../baseURL/axios";
+import {axiosUser} from "../../baseURL/axios";
 
 const login = async (data: {email:string,password:string}) => {
   const response = await axiosUser.post(`/users/back/Auth/login`, data);

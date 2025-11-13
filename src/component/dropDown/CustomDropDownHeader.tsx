@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {BsChatLeftText} from "react-icons/bs";
 import {RiArrowDropDownLine, RiArrowDropUpLine} from "react-icons/ri";
 import {AuthStore} from "../../store/authStore.ts";
-import {useLogout} from "../../service/auth.service.ts";
+import {useLogout} from "../../service/user/auth.service.ts";
 import RulerLoadingOverlay from "../general/rulerLoading/RulerLoading.tsx";
 
 
