@@ -6,7 +6,8 @@ import TeacherManagementPage from "../pages/userManagment/TeacherManagementPage.
 import ReportsPage from "../pages/payManagmenet/ReportsPage.tsx";
 import PayManagementPage from "../pages/payManagmenet/PayManagementPage.tsx";
 import MyCoursePage from "../pages/MyCoursePage.tsx";
-import ListOfCoursePage from "../pages/courseManagement/ListOfCoursePage.tsx";
+import ListOfCategoriesPage from "../pages/courseManagement/ListOfCategoriesPage.tsx";
+import ProductPage from "../pages/courseManagement/ProductPage.tsx";
 
 export interface RouteConfig {
   path: string;
@@ -23,6 +24,7 @@ export const Paths: RouteConfig[] = [
   { path: "/list-roles", label: "لیست نقش ها", element: <RoleManagementPage />,requiredPermission:'roles' },
   { path: "/pay-management", label: "مدیریت پرداخت", element: <PayManagementPage />,requiredPermission:'roles' },
   { path: "/reports", label: "گزارشات", element: <ReportsPage />,requiredPermission:'roles' },
-  { path: "/list-course", label: "لیست دوره ها", element: <ListOfCoursePage />,requiredPermission:'products.index' },
+  { path: "/list-categories", label: "دسته بندی دوره ها", element: <ListOfCategoriesPage />,requiredPermission:'products' },
+  { path: "/course-groups", label: "دوره های تعریف شده", element: <ProductPage />,requiredPermission:'products' },
   { path: "/my-course", label: "دوره های من", element: <MyCoursePage />,requiredPermission:'products' },
 ];

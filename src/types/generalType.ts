@@ -16,3 +16,24 @@ export type UserFormValues = {
   role: number | string;
   is_Verify: boolean;
 };
+
+export type ProductForm = {
+  Title: string;
+  CategoryId: number | null;
+  TitleEn: string;
+  Description: string;
+  ShortDescription: string;
+  MetaTitle: string;
+  MetaDescription: string;
+  ImageAlt: File | null;
+  SubCategoryIds: number[];
+  Prices: {
+    id: number,
+    priceValue: number,
+    discountPercent: number,
+    discountPrice: number,
+    stock: number
+  };
+  Image: File | null;
+  Images: File | null;
+};

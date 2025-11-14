@@ -7,7 +7,7 @@ import {useModalStore, useSetDataStore} from "../../store/modalStore.ts";
 import CreateCategoryModal from "../../component/pages/courseManagment/CreateCategoryModal.tsx";
 import DeletedCategory from "../../component/pages/courseManagment/DeletedCategory.tsx";
 
-const ListOfCoursePage = () => {
+const ListOfCategoriesPage = () => {
   const {data} = useCategory();
   const {setDataTypeIdsAsync,dataTypeIds} = useSetDataStore()
   const {modals, open, close} = useModalStore();
@@ -58,4 +58,4 @@ const ListOfCoursePage = () => {
   );
 };
 
-export default ListOfCoursePage;
+export default ListOfCategoriesPage;

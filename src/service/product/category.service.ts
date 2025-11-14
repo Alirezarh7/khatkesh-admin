@@ -54,6 +54,12 @@ const EditCategory = async (formData: FormData) => {
   return response.data;
 };
 
+export const useEditCategory = () => {
+  return useMutation({
+    mutationFn: EditCategory,
+  });
+};
+
 const deleteCategory = async (Id: number) => {
   const response = await axiosProducts.delete(`/ProductsService/back/Category/delete`, {
     params: { Id }
@@ -64,11 +70,5 @@ const deleteCategory = async (Id: number) => {
 export const useDeleteCategory = () => {
   return useMutation({
     mutationFn: deleteCategory,
-  });
-};
-
-export const useEditCategory = () => {
-  return useMutation({
-    mutationFn: EditCategory,
   });
 };
