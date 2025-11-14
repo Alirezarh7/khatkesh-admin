@@ -66,7 +66,6 @@ const CustomSidebar = () => {
             title: "دوره ها",
             id: "4",
             dropdownItems: [
-                { href: "/create-course", title: "تعریف دوره", requiredPermission: "products.create" },
                 { href: "/list-course", title: "لیست دوره تعریف‌شده", requiredPermission: "products.index" },
             ],
         },

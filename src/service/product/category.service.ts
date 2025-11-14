@@ -8,8 +8,21 @@ const category = async () => {
 
 export const useCategory = () => {
   return useQuery({
-    queryFn:()=>category(),
-    queryKey:['rowRoleData']
+    queryFn: () => category(),
+    queryKey: ['rowRoleData']
+  });
+};
+
+const categoryDataByID = async (id: number) => {
+  const response = await axiosProducts.get(`/ProductsService/back/Category/Get?id=${id}`);
+  return response.data;
+};
+
+export const useCategoryDataByID = (id: number) => {
+  return useQuery({
+    enabled: false,
+    queryFn: () => categoryDataByID(id),
+    queryKey: ['categoryDataByID']
   });
 };
 
@@ -18,7 +31,7 @@ const createCategoryAPI = async (formData: FormData) => {
     "/ProductsService/back/Category/Create",
     formData,
     {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {"Content-Type": "multipart/form-data"},
     }
   );
   return response.data;
@@ -27,5 +40,35 @@ const createCategoryAPI = async (formData: FormData) => {
 export const useCreateCategory = () => {
   return useMutation({
     mutationFn: createCategoryAPI,
+  });
+};
+
+const EditCategory = async (formData: FormData) => {
+  const response = await axiosProducts.put(
+    "/ProductsService/back/Category/Edit",
+    formData,
+    {
+      headers: {"Content-Type": "multipart/form-data"},
+    }
+  );
+  return response.data;
+};
+
+const deleteCategory = async (Id: number) => {
+  const response = await axiosProducts.delete(`/ProductsService/back/Category/delete`, {
+    params: { Id }
+  });
+  return response.data;
+};
+
+export const useDeleteCategory = () => {
+  return useMutation({
+    mutationFn: deleteCategory,
+  });
+};
+
+export const useEditCategory = () => {
+  return useMutation({
+    mutationFn: EditCategory,
   });
 };

@@ -1,7 +1,6 @@
 import HomePage from "../pages/HomePage.tsx";
 import ListManagementPage from "../pages/userManagment/ListManagementPage.tsx";
 import RoleManagementPage from "../pages/roleManagement/RoleManagementPage.tsx";
-import CreateCoursePage from "../pages/courseManagement/CreateCoursePage.tsx";
 import AdminManagementPage from "../pages/userManagment/AdminManagementPage.tsx";
 import TeacherManagementPage from "../pages/userManagment/TeacherManagementPage.tsx";
 import ReportsPage from "../pages/payManagmenet/ReportsPage.tsx";
@@ -24,7 +23,6 @@ export const Paths: RouteConfig[] = [
   { path: "/list-roles", label: "لیست نقش ها", element: <RoleManagementPage />,requiredPermission:'roles' },
   { path: "/pay-management", label: "مدیریت پرداخت", element: <PayManagementPage />,requiredPermission:'roles' },
   { path: "/reports", label: "گزارشات", element: <ReportsPage />,requiredPermission:'roles' },
-  { path: "/create-course", label: "تعریف دوره", element: <CreateCoursePage />,requiredPermission:'products.create' },
   { path: "/list-course", label: "لیست دوره ها", element: <ListOfCoursePage />,requiredPermission:'products.index' },
   { path: "/my-course", label: "دوره های من", element: <MyCoursePage />,requiredPermission:'products' },
 ];

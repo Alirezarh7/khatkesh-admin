@@ -1,6 +1,29 @@
 @import url("/public/content/fonts/iransans/css/style.css");
 @import "tailwindcss";
 
+.ql-editor {
+    font-family: IRANSans, sans-serif !important;
+    direction: rtl;
+    text-align: right;
+}
+
+.ql-container {
+    font-family: IRANSans, sans-serif !important;
+}
+
+.ql-toolbar {
+    direction: rtl;
+    text-align: right;
+}
+
+.ql-editor.ql-blank::before {
+    font-family: IRANSans, sans-serif !important;
+    right: 2 !important;
+    left: auto !important;
+    text-align: right !important;
+    direction: rtl !important;
+}
+
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {

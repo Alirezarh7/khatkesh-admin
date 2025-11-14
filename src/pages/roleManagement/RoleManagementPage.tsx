@@ -62,7 +62,7 @@ const RoleManagementPage = () => {
 
       </DataSummary>
       <CreateAndEditRoleModal editRolment = {dataTypeIds}  isOpen={isOpenCreateAndEditRoleodal} onClose={() => close('createAndEditRole')}  />
-      <DeleteRolModal editRolment = {dataTypeIds}  isOpen={isOpenDeleteRolModal} onClose={() => close('deleteRolModal')}  />
+      <DeleteRolModal   editRolment = {dataTypeIds}  isOpen={isOpenDeleteRolModal} onClose={() => close('deleteRolModal')}  />
     </>
   );
 };
